@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<title>С Днём Рождения!</title>
 <style>
+  /* Фон */
   body {
     margin: 0;
     height: 100vh;
@@ -17,144 +13,58 @@
     color: #fff;
   }
 
+  /* Искорки */
+  .spark {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: sparkle 1s infinite alternate;
+  }
+
+  @keyframes sparkle {
+    0% { transform: scale(1) translate(0,0); opacity: 0.5; }
+    50% { transform: scale(1.5) translate(2px,-2px); opacity: 1; }
+    100% { transform: scale(1) translate(-2px,2px); opacity: 0.5; }
+  }
+
   /* Конфетти */
   .confetti {
     position: absolute;
     width: 6px;
     height: 6px;
     background: #fff;
+    border-radius: 50%;
+    opacity: 0.9;
     animation: fall linear infinite;
-    opacity: 0.7;
   }
+
   @keyframes fall {
     0% { transform: translateY(-10px) rotate(0deg); }
     100% { transform: translateY(100vh) rotate(360deg); }
   }
-
-  /* Торт */
-  #cake {
-    width: 300px;
-    height: 150px;
-    background: #fff;
-    border-radius: 10px 10px 30px 30px;
-    position: relative;
-    margin-bottom: 30px;
-  }
-
-  /* Свечки */
-  .candle {
-    width: 8px;
-    height: 30px;
-    background: #ffcc00;
-    position: absolute;
-    top: -30px;
-    border-radius: 3px;
-  }
-
-  .flame {
-    width: 6px;
-    height: 10px;
-    background: orange;
-    border-radius: 50%;
-    position: absolute;
-    top: -10px;
-    left: 1px;
-    animation: flicker 0.2s infinite alternate;
-  }
-
-  @keyframes flicker {
-    0% { transform: scale(1) translateY(0); opacity: 1; }
-    100% { transform: scale(1.2) translateY(-2px); opacity: 0.8; }
-  }
-
-  /* Кнопка подарка */
-  #giftBtn {
-    display: none;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background: #ff4d4d;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-
-  /* Конверт */
-  #envelope {
-    width: 200px;
-    height: 120px;
-    background: #fff;
-    border: 2px solid #ccc;
-    position: relative;
-    display: none;
-    border-radius: 5px;
-    margin-top: 20px;
-  }
-
-  #letter {
-    width: 180px;
-    height: 100px;
-    background: #f5f5f5;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    display: none;
-    padding: 10px;
-    border-radius: 5px;
-    overflow: auto;
-    color: #000;
-  }
 </style>
-</head>
-<body>
-
-<div id="cake"></div>
-<button id="giftBtn">Хочешь получить подарок?</button>
-
-<div id="envelope">
-  <div id="letter">💓 С Днём Рождения, Матвей! 💓</div>
-</div>
 
 <script>
-  const cake = document.getElementById('cake');
-
-  // Добавляем 15 свечек
-  for (let i = 0; i < 15; i++) {
-    const candle = document.createElement('div');
-    candle.className = 'candle';
-    candle.style.left = (i * 18 + 10) + 'px'; // расстояние между свечками
-
-    const flame = document.createElement('div');
-    flame.className = 'flame';
-    candle.appendChild(flame);
-
-    cake.appendChild(candle);
-  }
-
-  // Появление кнопки после установки свечек
-  setTimeout(() => {
-    document.getElementById('giftBtn').style.display = 'block';
-  }, 500);
-
-  // Нажатие на кнопку подарка
-  document.getElementById('giftBtn').onclick = function() {
-    const envelope = document.getElementById('envelope');
-    const letter = document.getElementById('letter');
-    envelope.style.display = 'block';
-    setTimeout(() => {
-      letter.style.display = 'block';
-    }, 500);
+  // Искорки
+  for (let i = 0; i < 50; i++) {
+    const spark = document.createElement('div');
+    spark.className = 'spark';
+    spark.style.left = Math.random() * window.innerWidth + 'px';
+    spark.style.top = Math.random() * window.innerHeight + 'px';
+    spark.style.animationDuration = (0.5 + Math.random() * 1) + 's';
+    document.body.appendChild(spark);
   }
 
   // Конфетти
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 70; i++) {
     const confetti = document.createElement('div');
     confetti.className = 'confetti';
     confetti.style.left = Math.random() * window.innerWidth + 'px';
-    confetti.style.animationDuration = (3 + Math.random() * 3) + 's';
+    confetti.style.animationDuration = (1 + Math.random() * 2) + 's'; // быстрее
+    confetti.style.transform = rotate(${Math.random()*360}deg); // разное вращение
     document.body.appendChild(confetti);
   }
 </script>
-
-</body>
-</html>
